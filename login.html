@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="login-container">
+        <h1>Student Login</h1>
+        <form id="login-form" onsubmit="return handleLogin()">
+            <label for="student-id">Student ID:</label>
+            <input type="text" id="student-id" name="student-id" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <script>
+        function handleLogin() {
+            const studentId = document.getElementById('student-id').value;
+            if (studentId) {
+                // Pass the Student ID to the course-selection page as a URL parameter
+                window.location.href = 'course-selection.html?student-id=' + encodeURIComponent(studentId);
+            }
+            return false; // Prevent default form submission
+        }
+    </script>
+</body>
+</html>

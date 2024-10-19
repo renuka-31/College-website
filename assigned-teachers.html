@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assigned Teachers</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        .course-teacher {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Assigned Teachers</h1>
+    <div id="assigned-courses-container"></div>
+
+    <script>
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                studentId: params.get('student-id'),
+                selectedCourses: JSON.parse(decodeURIComponent(params.get('selected-courses')))
+            };
+        }
+
+        const { studentId, selectedCourses } = getQueryParams();
+        const container = document.getElementById('assigned-courses-container');
+
+        const teachers = {
+            "Theory Course 1": "Mr. Smith",
+            "Theory Course 2": "Ms. Johnson",
+            "Theory Course 3": "Dr. Lee",
+            "Theory Course 4": "Ms. Brown",
+            "Theory Course 5": "Mr. Taylor",
+            "Theory Course 6": "Mrs. Davis",
+            "Lab Course 1": "Dr. White",
+            "Lab Course 2": "Mr. Green",
+            "Lab Course 3": "Ms. Black",
+            "Lab Course 4": "Mrs. Clark"
+        };
+
+        const displayCoursesWithTeachers = (courses) => {
+            for (let course of courses.theory) {
+                const teacher = teachers[course];
+                container.innerHTML += <div class="course-teacher">${course} - Assigned Teacher: ${teacher}</div>;
+            }
+            for (let course of courses.lab) {
+                const teacher = teachers[course];
+                container.innerHTML += <div class="course-teacher">${course} - Assigned Teacher: ${teacher}</div>;
+            }
+        };
+
+        displayCoursesWithTeachers(selectedCourses);
+    </script>
+</body>
+</html>

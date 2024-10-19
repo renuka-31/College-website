@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Selection</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        #student-id {
+            color: #3498db; /* Unique color for Student ID */
+            font-weight: bold;
+        }
+        #selected-courses {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="course-selection-container">
+        <h1>Course Selection for Student ID: <span id="student-id"></span></h1>
+        <form id="course-form">
+            <h2>Theory Courses (Select 4)</h2>
+            <div class="course-selection-wrapper">
+                <label><input type="checkbox" name="theory-courses" value="Theory Course 1"> Theory Course 1</label><br>
+                <label><input type="checkbox" name="theory-courses" value="Theory Course 2"> Theory Course 2</label><br>
+                <label><input type="checkbox" name="theory-courses" value="Theory Course 3"> Theory Course 3</label><br>
+                <label><input type="checkbox" name="theory-courses" value="Theory Course 4"> Theory Course 4</label><br>
+                <label><input type="checkbox" name="theory-courses" value="Theory Course 5"> Theory Course 5</label><br>
+                <label><input type="checkbox" name="theory-courses" value="Theory Course 6"> Theory Course 6</label><br>
+            </div>
+
+            <h2>Lab Courses (Select 2)</h2>
+            <div class="course-selection-wrapper">
+                <label><input type="checkbox" name="lab-courses" value="Lab Course 1"> Lab Course 1</label><br>
+                <label><input type="checkbox" name="lab-courses" value="Lab Course 2"> Lab Course 2</label><br>
+                <label><input type="checkbox" name="lab-courses" value="Lab Course 3"> Lab Course 3</label><br>
+                <label><input type="checkbox" name="lab-courses" value="Lab Course 4"> Lab Course 4</label><br>
+            </div>
+
+            <button type="submit">Submit Course Selection</button>
+        </form>
+
+        <div id="selected-courses">
+            <h3>Selected Courses</h3>
+            <p>Theory Courses: <span id="selected-theory-courses"></span></p>
+            <p>Lab Courses: <span id="selected-lab-courses"></span></p>
+        </div>
+    </div>
+
+    <script>
+        function getStudentIdFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('student-id');
+        }
+
+        const studentId = getStudentIdFromUrl();
+        document.getElementById('student-id').textContent = studentId;
+
+        document.getElementById('course-form').onsubmit = function(event) {
+            event.preventDefault();
+
+            const theoryCourses = document.querySelectorAll('input[name="theory-courses"]:checked');
+            const labCourses = document.querySelectorAll('input[name="lab-courses"]:checked');
+
+            if (theoryCourses.length !== 4) {
+                alert('Please select exactly 4 theory courses.');
+                return false;
+            }
+
+            if (labCourses.length !== 2) {
+                alert('Please select exactly 2 lab courses.');
+                return false;
+            }
+
+            const selectedTheoryCourses = Array.from(theoryCourses).map(option => option.value).join(', ');
+            const selectedLabCourses = Array.from(labCourses).map(option => option.value).join(', ');
+
+            // Redirect to the next page with the selected courses and student ID
+            const selectedCourses = encodeURIComponent(JSON.stringify({
+                theory: selectedTheoryCourses.split(', '),
+                lab: selectedLabCourses.split(', ')
+            }));
+            window.location.href = `assigned-teachers.html?student-id=${studentId}&selected-courses=${selectedCourses}`;
+
+        };
+
+        // Limit selections for theory and lab courses
+        const theoryCheckboxes = document.querySelectorAll('input[name="theory-courses"]');
+        theoryCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const selectedTheoryCourses = document.querySelectorAll('input[name="theory-courses"]:checked');
+                if (selectedTheoryCourses.length > 4) {
+                    this.checked = false;
+                    alert('You can only select 4 theory courses.');
+                }
+            });
+        });
+
+        const labCheckboxes = document.querySelectorAll('input[name="lab-courses"]');
+        labCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const selectedLabCourses = document.querySelectorAll('input[name="lab-courses"]:checked');
+                if (selectedLabCourses.length > 2) {
+                    this.checked = false;
+                    alert('You can only select 2 lab courses.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

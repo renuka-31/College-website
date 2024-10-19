@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Profiles</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-top: 20px;
+        }
+        .container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .profile {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 200px;
+            margin: 20px;
+            padding: 20px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .profile:hover {
+            transform: scale(1.05);
+        }
+        .icon {
+            font-size: 40px;
+            color: #666;
+        }
+        h2 {
+            margin: 10px 0;
+            font-size: 20px;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+    <h1>Teacher Profiles</h1>
+    <div class="container">
+        <div class="profile" onclick="showDetails('Teacher 1')">
+            <i class="fas fa-user icon"></i>
+            <h2>Teacher 1</h2>
+        </div>
+        <div class="profile" onclick="showDetails('Teacher 2')">
+            <i class="fas fa-user icon"></i>
+            <h2>Teacher 2</h2>
+        </div>
+        <div class="profile" onclick="showDetails('Teacher 3')">
+            <i class="fas fa-user icon"></i>
+            <h2>Teacher 3</h2>
+        </div>
+        <div class="profile" onclick="showDetails('Teacher 4')">
+            <i class="fas fa-user icon"></i>
+            <h2>Teacher 4</h2>
+        </div>
+    </div>
+
+    <script>
+        function showDetails(teacherName) {
+            const details = {
+                "Teacher 1": {
+                    certification: "M.Sc. in Mathematics",
+                    achievements: "Best Teacher Award 2023",
+                    resources: "Math Worksheets, Online Courses",
+                    rating: 4
+                },
+                "Teacher 2": {
+                    certification: "B.A. in English Literature",
+                    achievements: "Published Author, Best Speaker 2022",
+                    resources: "Literature Books, Online Lectures",
+                    rating: 5
+                },
+                "Teacher 3": {
+                    certification: "M.Sc. in Physics",
+                    achievements: "Research Grants, Speaker at Conferences",
+                    resources: "Physics Labs, Tutorials",
+                    rating: 4
+                },
+                "Teacher 4": {
+                    certification: "Ph.D. in Chemistry",
+                    achievements: "Innovative Teaching Award",
+                    resources: "Chemistry Kits, Experiments",
+                    rating: 3
+                },
+            };
+
+            const teacher = details[teacherName];
+    const stars = '⭐'.repeat(teacher.rating) + '☆'.repeat(5 - teacher.rating);
+
+    // Use template literals for the alert message, no need for '+' signs
+    alert(`${teacherName} Details:\n\n
+        Academic Certification: ${teacher.certification}\n
+        Achievements: ${teacher.achievements}\n
+        Resources: ${teacher.resources}\n
+        Rating: ${stars} (${teacher.rating} out of 5)`);
+        }
+    </script>
+</body>
+</html>

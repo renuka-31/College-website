@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Web Interface</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+
+    <h1>Welcome to the  RGMCET</h1>
+    <h1>HACKATHON</h1>
+
+    <div class="container">
+        <div class="dashboard student" onclick="window.location.href='login.html'">
+            <i class="fas fa-user-graduate icon"></i>
+            <h2>Student</h2>
+            <p>Manage student activities</p>
+        </div>
+        <div class="dashboard teacher" onclick="window.location.href='teachers.html'">
+            <i class="fas fa-chalkboard-teacher icon"></i>
+            <h2>Teacher</h2>
+            <p>Manage teacher tasks</p>
+        </div>
+        <div class="dashboard admin" onclick="showMessage('Admin Dashboard')">
+            <i class="fas fa-cog icon"></i>
+            <h2>Admin</h2>
+            <p>Manage administrative tasks</p>
+        </div>
+    </div>
+    
+    <script>
+        function showMessage(message) {
+            alert(message + ' clicked!');
+        }
+    </script>
+</body>
+</html>
